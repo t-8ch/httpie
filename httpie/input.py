@@ -123,6 +123,8 @@ class Parser(ArgumentParser):
             # Default to 'https://' if invoked as `https args`.
             scheme = HTTPS if self.env.progname == 'https' else HTTP
             self.args.url = scheme + self.args.url
+        self.args.session = self.args.session or \
+                            os.environ.get('HTTPIE_SESSION', None)
         self._process_auth()
 
         return self.args
